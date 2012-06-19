@@ -8,13 +8,13 @@ class Zint < Formula
   head 'git://zint.git.sourceforge.net/gitroot/zint/zint'
 
   depends_on 'cmake' => :build
+  # For zint-qt GUI: (lib works without qt.)
+  depends_on 'qt' => :optional
 
   def install
+    ENV.x11
     mkdir 'zint-build' do
-      system "cmake", "..",
-                      "-DCMAKE_PREFIX_PATH=#{prefix}",
-                      "-DCMAKE_C_FLAGS=-I/usr/X11/include",
-                      *std_cmake_args
+      system "cmake", "..", *std_cmake_args
       system "make install"
     end
   end
