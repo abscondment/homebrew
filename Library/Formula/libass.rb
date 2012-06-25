@@ -9,6 +9,9 @@ class Libass < Formula
   depends_on 'fribidi'
 
   def install
+    # libass needs "ft2build.h" which is in X11
+    ENV.x11
+
     system "./configure", "--disable-dependency-tracking", "--prefix=#{prefix}"
     system "make install"
   end
