@@ -10,6 +10,9 @@ class Theora < Formula
   depends_on 'libvorbis'
 
   def install
+    # Theora needs to find png.h:
+    ENV.x11
+
     system "./configure", "--disable-dependency-tracking",
                           "--prefix=#{prefix}"
     system "make install"
